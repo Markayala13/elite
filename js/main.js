@@ -87,6 +87,35 @@ document.addEventListener("DOMContentLoaded", () => {
         else navbar.classList.remove('scrolled');
     });
 
+    // Mobile Menu Toggle
+    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    const navItems = document.querySelectorAll('.nav-links a');
+
+    if (mobileBtn && navLinks) {
+        mobileBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu on link click
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                if (mobileBtn.querySelector('i')) {
+                    mobileBtn.querySelector('i').classList.replace('fa-xmark', 'fa-bars');
+                }
+            });
+        });
+    }
+
     // Hero Entry Animation Timeline
     const tl = gsap.timeline();
 
